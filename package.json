@@ -1,0 +1,16 @@
+{
+  "name": "appreviews",
+  "version": "1.0.0",
+  "description": "Appreview-slackbot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --experimental-modules src/index.mjs",
+    "dev": "node --experimental-modules --inspect-brk src/index.mjs"
+  },
+  "author": "Jørgen Faret",
+  "license": "ISC",
+  "dependencies": {
+    "isomorphic-fetch": "^2.2.1"
+  }
+}
