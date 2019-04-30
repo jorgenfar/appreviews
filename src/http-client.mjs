@@ -1,6 +1,8 @@
 import fetch from 'isomorphic-fetch';
+import rxjs from 'rxjs';
 
-export const fetchJson = async (url, options) => {
-    const response = await fetch(url, options);
-    return response.json();
+export const fetchJson = (url, options) => {
+    return new rxjs.from(fetch(url, options)
+        .then(res => res.json())
+    );
 };
