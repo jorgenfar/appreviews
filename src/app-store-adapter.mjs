@@ -10,6 +10,7 @@ export const getAppStoreReviews = async () => {
 const parseReviews = async (reviewResponse) => {
     const { feed: { entry: reviews } } = reviewResponse;
     return reviews.map(review => ({
+        userName: review.author.name.label,
         title: review.title.label,
         body: review.content.label,
         rating: review['im:rating'].label,
