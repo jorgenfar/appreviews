@@ -8,4 +8,4 @@ const { pollAppStore } = require('./app-store-service');
 pollAppStore().pipe(
     map(formatReview),
     map(postMessage)
-).subscribe(console.log);
+).subscribe();
