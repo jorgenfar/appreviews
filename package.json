@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --experimental-modules src/index.mjs",
-    "dev": "node --experimental-modules --inspect-brk src/index.mjs"
+    "start": "node src/index.js",
+    "dev": "node --inspect-brk src/index.js"
   },
   "author": "Jørgen Faret",
   "license": "ISC",
