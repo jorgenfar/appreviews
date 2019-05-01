@@ -1,5 +1,11 @@
-const { pollAppStore } = require('./app-store-service');
-const stars = (rating) => '⭐️'.repeat(rating);
+require('dotenv').config();
+const { map } = require('rxjs/operators');
 
-pollAppStore()
-    .subscribe(review => console.log(stars(review.rating) + '\n' + review.title + '\n' + review.body + '\n\n'));
+const { postMessage } = require('./slack-adapter');
+const { formatReview } = require('./review-formatter');
+const { pollAppStore } = require('./app-store-service');
+
+pollAppStore().pipe(
+    map(formatReview),
+    map(postMessage)
+).subscribe(console.log);

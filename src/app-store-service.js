@@ -4,9 +4,9 @@ const { switchMap, tap, filter } = require('rxjs/operators');
 const { getAppStoreReviews } = require('./app-store-adapter');
 const { ReviewBuffer } = require('./review-buffer');
 
-const DEFAULT_PERIOD_MS = 60000;
+const DEFAULT_PERIOD_MS = 10000;
 
-const buffer = new ReviewBuffer(50);
+const buffer = new ReviewBuffer(100);
 
 const pollAppStore = (period = DEFAULT_PERIOD_MS) => timer(0, period).pipe(
     switchMap(getAppStoreReviews),

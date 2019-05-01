@@ -1,13 +1,13 @@
 const { flatMap } = require('rxjs/operators');
 const { from } = require('rxjs');
 
-const { fetchJsonObservable } = require('./fetch-json-observable');
+const { get } = require('./fetch-observable');
 
 const MOBILBANK_APPLE_APP_ID = 463742159;
 const APP_STORE_RSS_FEED_URL = `https://itunes.apple.com/no/rss/customerreviews/id=${MOBILBANK_APPLE_APP_ID}/sortBy=mostRecent/json`;
 
 const getAppStoreReviews = () =>
-    fetchJsonObservable(APP_STORE_RSS_FEED_URL).pipe(
+    get(APP_STORE_RSS_FEED_URL).pipe(
         flatMap(mapReviews)
     );
 
