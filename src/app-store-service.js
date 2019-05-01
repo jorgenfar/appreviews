@@ -4,7 +4,7 @@ const { switchMap, tap, filter } = require('rxjs/operators');
 const { getAppStoreReviews } = require('./app-store-adapter');
 const { ReviewBuffer } = require('./review-buffer');
 
-const DEFAULT_PERIOD_MS = 10000;
+const DEFAULT_PERIOD_MS = 60000;
 
 const buffer = new ReviewBuffer(100);
 
