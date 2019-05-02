@@ -6,7 +6,7 @@ const { ReviewBuffer } = require('../review-buffer');
 
 const DEFAULT_PERIOD_MS = 60000;
 
-const buffer = new ReviewBuffer('app_store', 100);
+const buffer = new ReviewBuffer('app_store', 500);
 
 const pollAppStore = (period = DEFAULT_PERIOD_MS) => timer(0, period).pipe(
     switchMap(getAppStoreReviews),
