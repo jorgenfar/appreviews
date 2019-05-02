@@ -1,9 +1,16 @@
+const { Observable } = require('rxjs');
+
+const { slackWebhookUrl } = require('../config.json');
+const { isDev } = require('./util');
 const { post } = require('./fetch-observable');
 
-const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
+const postMessage = (message) => post(slackWebhookUrl, { text: message });
 
-const postMessage = (message) => post(SLACK_WEBHOOK_URL, { text: message });
+const log = (msg) => new Observable(observer => {
+    console.log(msg);
+    observer.complete();
+});
 
 module.exports = {
-    postMessage,
+    postMessage: isDev() ? log : postMessage,
 };

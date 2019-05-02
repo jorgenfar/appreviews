@@ -85,3 +85,6 @@ typings/
 
 # IDEA
 .idea
+
+# Project file for persisting review IDs
+*.persist.json

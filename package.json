@@ -13,6 +13,7 @@
   "dependencies": {
     "dotenv": "^7.0.0",
     "isomorphic-fetch": "^2.2.1",
+    "lodash.debounce": "^4.0.8",
     "rxjs": "^6.5.1"
   }
 }
