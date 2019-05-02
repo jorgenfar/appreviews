@@ -1,6 +1,6 @@
 const debounce = require('lodash.debounce');
 
-const { writeFile } = require('./file-utils');
+const { writeFile } = require('./utils/file-utils');
 
 const debouncedPersist = debounce((fileName, data) => {
     writeFile(fileName, data)
@@ -9,7 +9,7 @@ const debouncedPersist = debounce((fileName, data) => {
 
 class ReviewBuffer {
     constructor(name, size) {
-        this.__fileName = `../${name}.persist.json`;
+        this.__fileName = `${process.cwd()}/${name}.persist.json`;
         this._size = size;
         
         try {

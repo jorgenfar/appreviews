@@ -1,7 +1,8 @@
-const { flatMap } = require('rxjs/operators');
-const { from } = require('rxjs');
+const { flatMap } = require('rxjs/operators/index');
+const { from } = require('rxjs/index');
 
-const { get } = require('./fetch-observable');
+const { Review } = require('../review');
+const { get } = require('../fetch-observable');
 
 const MOBILBANK_APPLE_APP_ID = 463742159;
 const APP_STORE_RSS_FEED_URL = `https://itunes.apple.com/no/rss/customerreviews/id=${MOBILBANK_APPLE_APP_ID}/sortBy=mostRecent/json`;
@@ -13,7 +14,7 @@ const getAppStoreReviews = () =>
 
 const mapReviews = (reviewResponse) => {
     const { feed: { entry: reviews } } = reviewResponse;
-    const mappedReviews = reviews.map(review => ({
+    const mappedReviews = reviews.map(review => new Review({
         id: review.id.label,
         userName: review.author.name.label,
         title: review.title.label,

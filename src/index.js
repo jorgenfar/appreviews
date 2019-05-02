@@ -1,9 +1,9 @@
 require('dotenv').config();
 const { map, flatMap } = require('rxjs/operators');
 
-const { postMessage } = require('./slack-adapter');
+const { postMessage } = require('./slack/slack-adapter');
 const { formatReview } = require('./review-formatter');
-const { pollAppStore } = require('./app-store-service');
+const { pollAppStore } = require('./app-store/app-store-service');
 
 pollAppStore().pipe(
     map(formatReview),

@@ -1,8 +1,8 @@
-const { timer } = require('rxjs');
-const { switchMap, tap, filter } = require('rxjs/operators');
+const { timer } = require('rxjs/index');
+const { switchMap, tap, filter } = require('rxjs/operators/index');
 
 const { getAppStoreReviews } = require('./app-store-adapter');
-const { ReviewBuffer } = require('./review-buffer');
+const { ReviewBuffer } = require('../review-buffer');
 
 const DEFAULT_PERIOD_MS = 60000;
 
