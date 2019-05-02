@@ -1,16 +1,18 @@
-const stars = (rating) => '⭐️'.repeat(rating);
+const stars = rating => '⭐️'.repeat(rating);
 
-const bold = (text) => `*${text}*`;
-
-const italic = (text) => `_${text}_`;
-
-const indentBlock = (text) => `>>>${text}`;
-
-const formatReview = (review) =>
-    `${stars(review.rating)} ${italic(review.userName)}` +
-    '\n' + bold(review.title) +
-    '\n' + indentBlock(review.body) +
-    '\n';
+const formatReview = review => ({
+    channel: 'general',
+    attachments: [
+        {
+            mrkdwn_in: ['text', 'pretext', 'title'],
+            color: review.rating > 3 ? 'good' : (review.rating >= 2 ? 'warning' : 'danger'),
+            author_name: review.userName,
+            title: stars(review.rating),
+            text: review.body,
+            footer: 'footer'
+        }
+    ]
+});
 
 module.exports = {
     formatReview,
