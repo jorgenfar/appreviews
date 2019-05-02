@@ -1,15 +1,13 @@
 require('dotenv').config();
 const { map, flatMap } = require('rxjs/operators');
 
+const { pollingIntervalMs } = require('../config');
 const { postMessage } = require('./slack/slack-adapter');
 const { formatReview } = require('./review-formatter');
 const { pollAppStore } = require('./app-store/app-store-service');
 
-pollAppStore().pipe(
+pollAppStore(pollingIntervalMs).pipe(
     map(formatReview),
     flatMap(postMessage)
 ).subscribe(response => {
-    // Request went well?
-}, error => {
-    console.error(error);
-});
+}, console.error);
