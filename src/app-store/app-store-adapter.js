@@ -20,6 +20,8 @@ const mapReviews = (reviewResponse) => {
         title: review.title.label,
         body: review.content.label,
         rating: review['im:rating'].label,
+        appVersion: review['im:version'].label,
+        link: review.author.uri.label,
     }));
     // The RSS feed endpoint returns an array with the newest reviews first.
     // We reverse the response from the feed, so that the observable emits reviews in the order they were written.
