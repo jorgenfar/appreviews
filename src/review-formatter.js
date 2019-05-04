@@ -1,17 +1,7 @@
 const { appleIcon, androidIcon } = require('../config');
-const { IOS, ANDROID } = require('./constants');
+const { platFormDependentString } = require('./utils/platform-utils');
 
 const stars = rating => '⭐️'.repeat(rating);
-
-const platFormDependentString = (platform, androidVersion, iosVersion) => {
-    if (platform === IOS) {
-        return iosVersion;
-    } else if (platform === ANDROID) {
-        return androidVersion;
-    } else {
-        throw new Error('Unknown platform');
-    }
-};
 
 const formatReview = review => ({
     attachments: [
