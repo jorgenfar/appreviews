@@ -13,7 +13,7 @@ const getAppStoreReviews = () =>
     );
 
 const mapReviews = (reviewResponse) => {
-    const { feed: { entry: reviews } } = reviewResponse;
+    const { feed: { entry: reviews = [] } } = reviewResponse;
     const mappedReviews = reviews.map(review => new Review({
         id: review.id.label,
         userName: review.author.name.label,
