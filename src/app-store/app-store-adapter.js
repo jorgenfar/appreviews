@@ -3,6 +3,7 @@ const { from } = require('rxjs/index');
 
 const { appStoreAppId  } = require('../../config');
 const { get } = require('../fetch-observable');
+const { IOS } = require('../constants');
 const { Review } = require('../review');
 
 const APP_STORE_RSS_FEED_URL = `https://itunes.apple.com/no/rss/customerreviews/id=${appStoreAppId}/sortBy=mostRecent/json`;
@@ -22,6 +23,7 @@ const mapReviews = (reviewResponse) => {
         rating: review['im:rating'].label,
         appVersion: review['im:version'].label,
         link: review.author.uri.label,
+        platform: IOS
     }));
     // The RSS feed endpoint returns an array with the newest reviews first.
     // We reverse the response from the feed, so that the observable emits reviews in the order they were written.

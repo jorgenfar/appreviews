@@ -1,5 +1,5 @@
 class Review {
-    constructor({ id, userName, title, body, rating, appVersion, link }) {
+    constructor({ id, userName, title, body, rating, appVersion, link, platform }) {
         this.id = id;
         this.userName = userName;
         this.title = title;
@@ -7,6 +7,7 @@ class Review {
         this.rating = rating;
         this.appVersion = appVersion;
         this.link = link;
+        this.platform = platform;
     }
 }
 
