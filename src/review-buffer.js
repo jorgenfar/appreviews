@@ -1,10 +1,11 @@
 const debounce = require('lodash.debounce');
 
 const { writeFile } = require('./utils/file-utils');
+const { error } = require('./logger');
 
 const debouncedPersist = debounce((fileName, data) => {
     writeFile(fileName, data)
-        .subscribe(() => {}, console.error);
+        .subscribe(() => {}, error);
 }, 1000);
 
 class ReviewBuffer {

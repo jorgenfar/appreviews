@@ -2,6 +2,7 @@ const fetch = require('isomorphic-fetch');
 const { from } = require('rxjs');
 
 const { isDev } = require('./utils/dev-utils');
+const { log } = require('./logger');
 
 const get = (url, options) => {
     return from(wrappedFetch(url, options)
@@ -20,11 +21,12 @@ const post = (url, body, options) => {
     }));
 };
 
-const wrappedFetch = (url, options) => {
+const wrappedFetch = (url, options = {}) => {
+    const verb = options.method || 'GET';
     return fetch(url, options)
         .then(res => {
             if (isDev()) {
-                console.log(`${new Date()} FETCH ${url}: ${res.status} ${res.statusText}`);
+                log(`${verb} ${url}, ${res.status} ${res.statusText}`);
             }
             return res;
         })
