@@ -1,5 +1,6 @@
 import torch
 from torch import nn
+from sklearn.utils import shuffle
 
 from data import read_and_tokenize, get_review_dataset, pad_reviews
 from utils.utils import compute_test_split, batchify
@@ -24,31 +25,43 @@ features = pad_reviews(features, opt.vocab_size, opt.max_sentence_length)
 model = CNN()
 
 train_features, train_targets, test_features, test_targets = compute_test_split(features, targets)
-optimizer = torch.optim.Adadelta(model.parameters(), 0.01)
+optimizer = torch.optim.Adadelta(model.parameters(), 0.1)
 criterion = torch.nn.CrossEntropyLoss()
 
 epochs = 50
 
 def evaluate():
     model.eval()
-    corrects = 0
+    r0 = 0
+    r1 = 0
+    r2 = 0
     for j, (minibatch_features, minibatch_targets) in enumerate(batchify(test_features, test_targets)):
         minibatch_features = torch.LongTensor(minibatch_features)
         minibatch_targets = torch.LongTensor(minibatch_targets)
 
         predictions = model(minibatch_features)
-        logit = torch.nn.functional.softmax(predictions, dim=1)
-        corrects += (torch.max(logit, 1)[1].view(minibatch_targets.size()).data == minibatch_targets.data).sum()
+        logit = torch.nn.functional.log_softmax(predictions, dim=1)
+
+        r0 += (torch.max(logit, 1)[1].view(minibatch_targets.size()).data == minibatch_targets.data).sum()
+        r1 += ((torch.max(logit, 1)[1].view(minibatch_targets.size()) - minibatch_targets).abs() <= 1).sum()
+        r2 += ((torch.max(logit, 1)[1].view(minibatch_targets.size()) - minibatch_targets).abs() <= 2).sum()
 
     size = len(test_features)
 
-    accuracy = 100.0 * corrects / size
+    r0 = 100.0 * r0 / size
+    r1 = 100.0 * r1 / size
+    r2 = 100.0 * r2 / size
 
-    print("\n\nEvaluation: {} / {} - {}%".format(corrects, size, accuracy))
+    print("\n\n *** EVALUATION ***")
+    print("R0: {}".format(r0))
+    print("R1: {}".format(r1))
+    print("R2: {}".format(r2))
+    print("****")
 
 
 for e in range(epochs):
     model.train()
+    train_features, train_targets = shuffle(train_features, train_targets)
     for j, (minibatch_features, minibatch_targets) in enumerate(batchify(train_features, train_targets)):
 
         minibatch_features = torch.LongTensor(minibatch_features)
