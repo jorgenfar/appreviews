@@ -2,6 +2,7 @@
   "pollingIntervalMs": 300000,
   "slackWebhookUrl": "https://hooks.slack.com/services/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",
   "appStoreAppId": 463742159,
+  "playStoreAppId": "no.sparebank1.mobilbank",
   "appleIcon": "https://emojis.slackmojis.com/emojis/images/1450319442/24/appleinc.png?1450319442",
   "androidIcon": "https://emojis.slackmojis.com/emojis/images/1493026598/2124/android.png?1493026598"
 }
