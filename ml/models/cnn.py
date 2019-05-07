@@ -23,7 +23,7 @@ class CNN(nn.Module):
         self.IN_CHANNEL = 1
 
         # one for UNK and one for zero padding
-        self.NUM_EMBEDDINGS = self.VOCAB_SIZE + 2
+        self.NUM_EMBEDDINGS = self.VOCAB_SIZE + 1
         assert (len(self.FILTERS) == len(self.FILTER_NUM))
 
         self.init_model()
@@ -37,17 +37,19 @@ class CNN(nn.Module):
 
 
         print("Copying weights to embedding layer")
-        weights_matrix = np.zeros((self.VOCAB_SIZE, self.WORD_DIM))
+        weights_matrix = np.zeros((self.NUM_EMBEDDINGS, self.WORD_DIM))
         num_found = 0
-        for i in range(self.VOCAB_SIZE):
+        for i in range(self.NUM_EMBEDDINGS):
             if i in opt.index_to_vector:
                 weights_matrix[i] = opt.index_to_vector[i]
                 num_found += 1
             else:
                 weights_matrix[i] = np.random.normal(scale=0.6, size=(self.WORD_DIM, ))
+
         print("Copied weights to embedding layer")
         print("Found vectors for {}/{} words".format(num_found, self.VOCAB_SIZE))
-
+        
+        self.embed.load_state_dict({'weight': torch.from_numpy(weights_matrix)})
 
         for i in range(len(self.FILTERS)):
             conv = nn.Conv1d(
