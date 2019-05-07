@@ -1,4 +1,3 @@
-require('dotenv').config();
 const { map, flatMap, merge } = require('rxjs/operators');
 
 const { pollingIntervalMs } = require('../config');
