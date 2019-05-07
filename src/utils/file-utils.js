@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { bindCallback } = require('rxjs/index');
+const { bindCallback } = require('rxjs');
 
 const writeFile = (fileName, data) => {
     const boundWriteFile = bindCallback(fs.writeFile);

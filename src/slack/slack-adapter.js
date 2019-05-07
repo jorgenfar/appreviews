@@ -1,4 +1,4 @@
-const { Observable } = require('rxjs/index');
+const { Observable } = require('rxjs');
 
 const { slackWebhookUrl } = require('../../config.json');
 const { isDev } = require('../utils/dev-utils');
