@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
-    "dev": "node --inspect-brk src/index.js"
+    "dev": "node --inspect-brk src/index.js",
+    "deploy:production": "pm2 deploy production update"
   },
   "author": "Jørgen Faret",
   "license": "ISC",
