@@ -7,9 +7,10 @@ const { pollAppStore } = require('./app-store/app-store-service');
 const { pollPlayStore } = require('./play-store/play-store-service');
 const { error } = require('./logger');
 
-pollAppStore(pollingIntervalMs).pipe(
+pollAppStore(pollingIntervalMs)
+  .pipe(
     merge(pollPlayStore(pollingIntervalMs)),
     map(formatReview),
     flatMap(postMessage)
-).subscribe(response => {
-}, error);
+  )
+  .subscribe(response => {}, error);

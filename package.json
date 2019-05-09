@@ -8,7 +8,8 @@
     "start": "node src/index.js",
     "dev": "node --inspect-brk src/index.js",
     "deploy:production": "pm2 deploy production update",
-    "copy-key": "scp google-publisher.key.json app@appreviews:/home/app/appreviews/source"
+    "copy-key": "scp google-publisher.key.json app@appreviews:/home/app/appreviews/source",
+    "format": "prettier --write \"src/**/*.js\""
   },
   "author": "Jørgen Faret",
   "license": "ISC",

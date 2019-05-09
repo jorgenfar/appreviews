@@ -5,34 +5,33 @@ const { isDev } = require('./utils/dev-utils');
 const { log } = require('./logger');
 
 const get = (url, options) => {
-    return from(wrappedFetch(url, options)
-        .then(res => res.json()
-    ));
+  return from(wrappedFetch(url, options).then(res => res.json()));
 };
 
 const post = (url, body, options) => {
-    return from(wrappedFetch(url, {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: {
-            'Content-type': 'application/json',
-        },
-        ...options
-    }));
+  return from(
+    wrappedFetch(url, {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: {
+        'Content-type': 'application/json'
+      },
+      ...options
+    })
+  );
 };
 
 const wrappedFetch = (url, options = {}) => {
-    const verb = options.method || 'GET';
-    return fetch(url, options)
-        .then(res => {
-            if (isDev()) {
-                log(`${verb} ${url}, ${res.status} ${res.statusText}`);
-            }
-            return res;
-        })
-}
+  const verb = options.method || 'GET';
+  return fetch(url, options).then(res => {
+    if (isDev()) {
+      log(`${verb} ${url}, ${res.status} ${res.statusText}`);
+    }
+    return res;
+  });
+};
 
 module.exports = {
-    get,
-    post,
+  get,
+  post
 };

@@ -8,12 +8,13 @@ const DEFAULT_PERIOD_MS = 60000;
 
 const buffer = new ReviewBuffer('play_store', 500);
 
-const pollPlayStore = (period = DEFAULT_PERIOD_MS) => timer(0, period).pipe(
+const pollPlayStore = (period = DEFAULT_PERIOD_MS) =>
+  timer(0, period).pipe(
     switchMap(getPlayStoreReviews),
     filter(review => !buffer.contains(review.id)),
     tap(review => buffer.add(review.id))
-);
+  );
 
 module.exports = {
-    pollPlayStore
+  pollPlayStore
 };
