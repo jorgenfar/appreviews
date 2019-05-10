@@ -13,11 +13,20 @@ const footer = review =>
     'App'
   )} Store>`;
 
+const color = rating => {
+  if (rating > 3) {
+    return 'good';
+  }
+  if (rating >= 2) {
+    return 'warning';
+  }
+  return 'danger';
+};
+
 const formatReview = review => ({
   attachments: [
     {
-      color:
-        review.rating > 3 ? 'good' : review.rating >= 2 ? 'warning' : 'danger',
+      color: color(review),
       author_name: review.userName,
       title: title(review),
       text: review.body,

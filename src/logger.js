@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const timeStamp = () => Date();
 
 const formatEntry = msg => `${timeStamp()}: ${msg}`;

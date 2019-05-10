@@ -43,7 +43,8 @@ const mapReviews = reviewResponse => {
         platform: ANDROID
       })
   );
-  // We reverse the response from the feed, so that the observable emits reviews in the order they were written.
+  // We reverse the response from the feed,
+  // so that the observable emits reviews in the order they were written.
   return from(mappedReviews.reverse());
 };
 

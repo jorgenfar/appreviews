@@ -13,4 +13,4 @@ pollAppStore(pollingIntervalMs)
     map(formatReview),
     flatMap(postMessage)
   )
-  .subscribe(response => {}, error);
+  .subscribe(() => {}, error);

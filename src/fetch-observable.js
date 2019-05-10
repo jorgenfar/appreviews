@@ -4,6 +4,16 @@ const { from } = require('rxjs');
 const { isDev } = require('./utils/dev-utils');
 const { log } = require('./logger');
 
+const wrappedFetch = (url, options = {}) => {
+  const verb = options.method || 'GET';
+  return fetch(url, options).then(res => {
+    if (isDev()) {
+      log(`${verb} ${url}, ${res.status} ${res.statusText}`);
+    }
+    return res;
+  });
+};
+
 const get = (url, options) => {
   return from(wrappedFetch(url, options).then(res => res.json()));
 };
@@ -19,16 +29,6 @@ const post = (url, body, options) => {
       ...options
     })
   );
-};
-
-const wrappedFetch = (url, options = {}) => {
-  const verb = options.method || 'GET';
-  return fetch(url, options).then(res => {
-    if (isDev()) {
-      log(`${verb} ${url}, ${res.status} ${res.statusText}`);
-    }
-    return res;
-  });
 };
 
 module.exports = {

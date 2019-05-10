@@ -9,6 +9,7 @@
     "dev": "node --inspect-brk src/index.js",
     "deploy:production": "pm2 deploy production update",
     "copy-key": "scp google-publisher.key.json app@appreviews:/home/app/appreviews/source",
+    "lint": "eslint \"src/**/*.js\"",
     "format": "prettier --write \"src/**/*.js\""
   },
   "author": "Jørgen Faret",
@@ -21,6 +22,11 @@
     "rxjs": "^6.5.1"
   },
   "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-prettier": "^3.0.1",
     "prettier": "^1.17.0"
   }
 }

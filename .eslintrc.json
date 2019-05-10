@@ -1,0 +1,15 @@
+
+{
+  "extends": ["airbnb-base", "prettier", "prettier/react"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "error",
+    "max-len": ["error", 100],
+    "import/no-dynamic-require": "off",
+    "global-require": "off",
+    "no-underscore-dangle": "off"
+  },
+  "env": {
+    "node": true
+  }
+}
