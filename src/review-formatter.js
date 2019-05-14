@@ -26,7 +26,7 @@ const color = rating => {
 const formatReview = review => ({
   attachments: [
     {
-      color: color(review),
+      color: color(review.rating),
       author_name: review.userName,
       title: title(review),
       text: review.body,
