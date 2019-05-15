@@ -1,5 +1,5 @@
 const { timer } = require('rxjs');
-const { switchMap, tap, filter } = require('rxjs/operators');
+const { concatMap, tap, filter } = require('rxjs/operators');
 
 const { getAppStoreReviews } = require('./app-store-adapter');
 const { ReviewBuffer } = require('../review-buffer');
@@ -10,7 +10,7 @@ const buffer = new ReviewBuffer('app_store', 500);
 
 const pollAppStore = (period = DEFAULT_PERIOD_MS) =>
   timer(0, period).pipe(
-    switchMap(getAppStoreReviews),
+    concatMap(getAppStoreReviews),
     filter(review => !buffer.contains(review.id)),
     tap(review => buffer.add(review.id))
   );
