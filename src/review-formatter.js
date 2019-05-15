@@ -1,4 +1,4 @@
-const { appleIcon, androidIcon } = require('../config');
+const { appleIcon, androidIcon } = require('../config.json');
 const { platFormDependentString } = require('./utils/platform-utils');
 
 const stars = rating => `${':star:️'.repeat(rating)}`;

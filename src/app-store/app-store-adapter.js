@@ -1,7 +1,7 @@
 const { flatMap } = require('rxjs/operators');
 const { from } = require('rxjs');
 
-const { appStoreAppId } = require('../../config');
+const { appStoreAppId } = require('../../config.json');
 const { get } = require('../fetch-observable');
 const { IOS } = require('../constants');
 const { Review } = require('../review');

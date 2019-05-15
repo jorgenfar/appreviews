@@ -1,6 +1,6 @@
 const { map, flatMap, merge } = require('rxjs/operators');
 
-const { pollingIntervalMs } = require('../config');
+const { pollingIntervalMs } = require('../config.json');
 const { postMessage } = require('./slack/slack-adapter');
 const { formatReview } = require('./review-formatter');
 const { pollAppStore } = require('./app-store/app-store-service');

@@ -2,8 +2,8 @@ const { google } = require('googleapis');
 const { from } = require('rxjs');
 const { flatMap } = require('rxjs/operators');
 
-const apiKey = require('../../google-publisher.key');
-const { playStoreAppId } = require('../../config');
+const apiKey = require('../../google-publisher.key.json');
+const { playStoreAppId } = require('../../config.json');
 const { Review } = require('../review');
 const { ANDROID } = require('../constants');
 
