@@ -7,7 +7,8 @@
     "max-len": ["error", 100],
     "import/no-dynamic-require": "off",
     "global-require": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "no-console": "off"
   },
   "env": {
     "node": true
