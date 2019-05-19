@@ -1,16 +1,13 @@
-const { Observable } = require('rxjs');
-
 const { slackWebhookUrl } = require('../../config.json');
 const { isDev } = require('../utils/dev-utils');
+const { post } = require('../fetch-wrapper');
 const { log } = require('../logger');
-const { post } = require('../fetch-observable');
 
 const postMessage = message => post(slackWebhookUrl, message);
 
-const dryRun = msg =>
-  new Observable(observer => {
-    log(msg);
-    observer.complete();
+const dryRun = (message) => new Promise((resolve) => {
+    log(message);
+    resolve();
   });
 
 module.exports = {

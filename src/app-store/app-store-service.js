@@ -1,20 +1,16 @@
-const { timer } = require('rxjs');
-const { concatMap, tap, filter } = require('rxjs/operators');
-
 const { getAppStoreReviews } = require('./app-store-adapter');
 const { ReviewBuffer } = require('../review-buffer');
 
-const DEFAULT_PERIOD_MS = 60000;
-
 const buffer = new ReviewBuffer('app_store', 500);
 
-const pollAppStore = (period = DEFAULT_PERIOD_MS) =>
-  timer(0, period).pipe(
-    concatMap(getAppStoreReviews),
-    filter(review => !buffer.contains(review.id)),
-    tap(review => buffer.add(review.id))
-  );
+const getAppStoreReviewsToPublish = async () => {
+  const reviews = await getAppStoreReviews();
+  const filteredReviews = reviews.filter(review => !buffer.contains(review.id));
+  filteredReviews.forEach(review => buffer.add(review.id));
+
+  return filteredReviews;
+};
 
 module.exports = {
-  pollAppStore
+  getAppStoreReviewsToPublish
 };

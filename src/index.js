@@ -1,16 +1,21 @@
-const { map, flatMap, merge } = require('rxjs/operators');
+const flatten = require('lodash.flatten');
 
 const { pollingIntervalMs } = require('../config.json');
 const { postMessage } = require('./slack/slack-adapter');
 const { formatReview } = require('./review-formatter');
-const { pollAppStore } = require('./app-store/app-store-service');
-const { pollPlayStore } = require('./play-store/play-store-service');
-const { error } = require('./logger');
+const {
+  getAppStoreReviewsToPublish
+} = require('./app-store/app-store-service');
+const {
+  getPlayStoreReviewsToPublish
+} = require('./play-store/play-store-service');
 
-pollAppStore(pollingIntervalMs)
-  .pipe(
-    merge(pollPlayStore(pollingIntervalMs)),
-    map(formatReview),
-    flatMap(postMessage)
-  )
-  .subscribe(() => {}, error);
+setInterval(async () => {
+  const reviewsToPublish = await Promise.all([
+    getAppStoreReviewsToPublish(),
+    getPlayStoreReviewsToPublish()
+  ]).then(flatten);
+
+  const formattedReviews = reviewsToPublish.map(formatReview);
+  formattedReviews.forEach(postMessage);
+}, pollingIntervalMs);

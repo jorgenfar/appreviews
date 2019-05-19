@@ -18,8 +18,8 @@
     "googleapis": "^39.2.0",
     "isomorphic-fetch": "^2.2.1",
     "lodash.debounce": "^4.0.8",
-    "pm2": "^3.5.0",
-    "rxjs": "^6.5.1"
+    "lodash.flatten": "^4.4.0",
+    "pm2": "^3.5.0"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
