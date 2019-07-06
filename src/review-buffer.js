@@ -1,12 +1,9 @@
 const fs = require('fs');
 const debounce = require('lodash.debounce');
 
-const { error } = require('./logger');
-
 const debouncedPersist = debounce((fileName, data) => {
   fs.writeFile(fileName, data, err => {
-    error(err);
-    if (err) throw err;
+    if (err) console.error(err);
   });
 }, 1000);
 

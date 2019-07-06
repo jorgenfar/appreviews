@@ -1,15 +1,25 @@
-const { slackWebhookUrl } = require('../../config.json');
-const { isDev } = require('../utils/dev-utils');
+const { token } = require('../../slack.key.json');
+const { slackChannel } = require('../../config.json');
 const { post } = require('../fetch-wrapper');
-const { log } = require('../logger');
+const { formatReview } = require('./review-formatter');
 
-const postMessage = message => post(slackWebhookUrl, message);
+const SLACK_POST_MESSAGE_URL = 'https://slack.com/api/chat.postMessage';
 
-const dryRun = (message) => new Promise((resolve) => {
-    log(message);
-    resolve();
-  });
+const postReview = review =>
+  post(
+    SLACK_POST_MESSAGE_URL,
+    {
+      channel: slackChannel,
+      ...formatReview(review)
+    },
+    {
+      headers: {
+        'Content-type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
 
 module.exports = {
-  postMessage: isDev() ? dryRun : postMessage
+  postReview
 };

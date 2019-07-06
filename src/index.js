@@ -1,8 +1,7 @@
 const flatten = require('lodash.flatten');
 
 const { pollingIntervalMs } = require('../config.json');
-const { postMessage } = require('./slack/slack-adapter');
-const { formatReview } = require('./review-formatter');
+const { postReview } = require('./slack/slack-adapter');
 const {
   getAppStoreReviewsToPublish
 } = require('./app-store/app-store-service');
@@ -14,8 +13,15 @@ setInterval(async () => {
   const reviewsToPublish = await Promise.all([
     getAppStoreReviewsToPublish(),
     getPlayStoreReviewsToPublish()
-  ]).then(flatten);
+  ])
+    .then(flatten)
+    .catch(console.error);
 
-  const formattedReviews = reviewsToPublish.map(formatReview);
-  formattedReviews.forEach(postMessage);
+  try {
+    if (reviewsToPublish) {
+      reviewsToPublish.forEach(postReview);
+    }
+  } catch (e) {
+    console.error(e);
+  }
 }, pollingIntervalMs);
