@@ -9,7 +9,7 @@ const {
   getPlayStoreReviewsToPublish
 } = require('./play-store/play-store-service');
 
-setInterval(async () => {
+const looper = async () => {
   const reviewsToPublish = await Promise.all([
     getAppStoreReviewsToPublish(),
     getPlayStoreReviewsToPublish()
@@ -24,4 +24,11 @@ setInterval(async () => {
   } catch (e) {
     console.error(e);
   }
-}, pollingIntervalMs);
+};
+
+const main = () => {
+  looper();
+  setTimeout(looper, pollingIntervalMs);
+};
+
+main();
