@@ -7,6 +7,8 @@ class Review {
     rating,
     appVersion,
     link,
+    device,
+    osVersion,
     platform
   }) {
     this.id = id;
@@ -16,6 +18,8 @@ class Review {
     this.rating = rating;
     this.appVersion = appVersion;
     this.link = link;
+    this.device = device;
+    this.osVersion = osVersion;
     this.platform = platform;
   }
 }

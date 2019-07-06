@@ -7,11 +7,13 @@ const title = review =>
   `${stars(review.rating)}${review.title ? ` - ${review.title}` : ''}`;
 
 const footer = review =>
-  `Versjon ${review.appVersion} - <${review.link}|${platFormDependentString(
+  `Appversjon ${review.appVersion}${platFormDependentString(
     review.platform,
-    'Play',
-    'App'
-  )} Store>`;
+    ` - ${review.osVersion}`,
+    ''
+  )}${platFormDependentString(review.platform, ` - ${review.device}`, '')} - <${
+    review.link
+  }|${platFormDependentString(review.platform, 'Play', 'App')} Store>`;
 
 const color = rating => {
   if (rating > 3) {
