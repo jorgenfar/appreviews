@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
     "dev": "node --inspect-brk src/index.js",
-    "deploy:production": "pm2 deploy production update",
-    "copy-key": "scp google-publisher.key.json app@appreviews:/home/app/appreviews/source",
+    "deploy": "npm run lint && npm run copy-key && pm2 deploy production update",
+    "copy-key": "scp *.key.json app@appreviews:/home/app/appreviews/source",
     "lint": "eslint \"src/**/*.js\"",
     "lint:fix": "eslint --fix \"src/**/*.js\"",
     "format": "prettier --write \"src/**/*.js\""
