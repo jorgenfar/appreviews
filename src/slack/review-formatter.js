@@ -15,20 +15,18 @@ const footer = review =>
     review.link
   }|${platFormDependentString(review.platform, 'Play', 'App')} Store>`;
 
-const color = rating => {
-  if (rating > 3) {
-    return 'good';
-  }
-  if (rating >= 2) {
-    return 'warning';
-  }
-  return 'danger';
+const COLORS = {
+  1: 'a30200',
+  2: 'daa038',
+  3: 'ffcc00',
+  4: '8bb72c',
+  5: '009e60'
 };
 
 const formatReview = review => ({
   attachments: [
     {
-      color: color(review.rating),
+      color: COLORS[review.rating],
       author_name: review.userName,
       title: title(review),
       text: review.body,
