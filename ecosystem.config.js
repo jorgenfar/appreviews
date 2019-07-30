@@ -5,7 +5,6 @@ module.exports = {
     {
       name: 'appreviews',
       script: 'src/index.js',
-      cwd: '/home/app/appreviews',
       instances: 1,
       autorestart: true,
       watch: false,
@@ -25,7 +24,7 @@ module.exports = {
       host: '68.183.223.4',
       ref: 'origin/master',
       repo: 'git@github.com:jorgenfar/appreviews.git',
-      path: '/home/app/appreviews',
+      path: '~/appreviews',
       'post-deploy':
         'npm install && pm2 reload ecosystem.config.js --env production'
     }
