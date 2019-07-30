@@ -7,6 +7,9 @@ const { ANDROID } = require('../constants');
 
 const getDevice = review => {
   const { deviceMetadata } = review.comments[0].userComment;
+  if (!deviceMetadata) {
+    return 'unknown';
+  }
   return `${deviceMetadata.manufacturer} ${deviceMetadata.productName}`;
 };
 
