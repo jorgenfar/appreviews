@@ -24,7 +24,7 @@ module.exports = {
       host: '68.183.223.4',
       ref: 'origin/master',
       repo: 'git@github.com:jorgenfar/appreviews.git',
-      path: '~/appreviews',
+      path: '/home/app/appreviews',
       'post-deploy':
         'npm install && pm2 reload ecosystem.config.js --env production'
     }
