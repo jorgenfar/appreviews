@@ -5,6 +5,7 @@ module.exports = {
     {
       name: 'appreviews',
       script: 'src/index.js',
+      cwd: '/home/app/appreviews',
       instances: 1,
       autorestart: true,
       watch: false,
