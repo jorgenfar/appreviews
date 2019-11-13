@@ -64,9 +64,7 @@ const mapReviews = reviewResponse => {
           body: review.comments[0].userComment.text,
           rating: review.comments[0].userComment.starRating,
           appVersion: review.comments[0].userComment.appVersionName,
-          link: `https://play.google.com/store/apps/details?id=${playStoreAppId}&reviewId=${
-            review.reviewId
-          }`,
+          link: `https://play.google.com/store/apps/details?id=${playStoreAppId}&reviewId=${review.reviewId}`,
           device: getDevice(review),
           osVersion: apiLevelToOsVersion(
             review.comments[0].userComment.androidOsVersion
