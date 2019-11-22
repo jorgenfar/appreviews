@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.js",
+    "start": "pm2 start src/index.js",
     "dev": "node --inspect-brk src/index.js",
     "deploy": "npm run lint && npm run copy-key && pm2 deploy production update",
     "lint": "eslint \"src/**/*.js\"",
@@ -18,7 +18,8 @@
     "googleapis": "^39.2.0",
     "isomorphic-fetch": "^2.2.1",
     "lodash.debounce": "^4.0.8",
-    "lodash.flatten": "^4.4.0"
+    "lodash.flatten": "^4.4.0",
+    "pm2": "^4.1.2"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
