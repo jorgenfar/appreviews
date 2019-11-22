@@ -1,7 +1,10 @@
 const fetch = require('isomorphic-fetch');
 
 const wrappedFetch = (url, options = {}) => {
-  return fetch(url, options);
+  return fetch(url, options).then(res => {
+    console.log(`${url}: ${res.status}`);
+    return res;
+  }).catch(console.error);
 };
 
 const get = (url, options) => {
