@@ -26,9 +26,5 @@ const looper = async () => {
   }
 };
 
-const main = () => {
-  looper();
-  setTimeout(looper, pollingIntervalMs);
-};
-
-main();
+looper();
+setInterval(looper, pollingIntervalMs);
