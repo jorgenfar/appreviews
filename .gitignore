@@ -86,8 +86,11 @@ typings/
 # IDEA
 .idea
 
-# Project file for persisting review IDs
+# project file for persisting review IDs
 *.persist.json
 
 # key json files
 *.key.json
+
+# config file
+config.json
