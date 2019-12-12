@@ -1,5 +1,10 @@
 # Getting started
 
+`pm2` is used to run the bot. Install `pm2` with the command:
+```
+npm i -g pm2
+```
+
 Install dependencies with `npm install`.
 
 # Developing
