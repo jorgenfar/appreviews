@@ -68,10 +68,6 @@ class CustomTransformer(nn.Module):
         return outputs
 
 
-def reduce_fn(vals):
-    return sum(vals) / len(vals)
-
-
 def train_loop_fn(data_loader, model, loss_fn, optimizer):
     model.train()
 
@@ -83,6 +79,7 @@ def train_loop_fn(data_loader, model, loss_fn, optimizer):
         loss.backward()
         optimizer.step()
 
+        print("Loss: ", loss.item())
 
 def eval_loop_fn(data_loader, model):
     model.eval()
