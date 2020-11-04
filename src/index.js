@@ -1,7 +1,7 @@
 const flatten = require('lodash.flatten');
-
-const { pollingIntervalMs } = require('../config.json');
+const { isProduction } = require('./utils/env-utils');
 const { postReview } = require('./slack/slack-adapter');
+
 const {
   getAppStoreReviewsToPublish
 } = require('./app-store/app-store-service');
@@ -9,7 +9,7 @@ const {
   getPlayStoreReviewsToPublish
 } = require('./play-store/play-store-service');
 
-const looper = async () => {
+const getAndPublishReviews = async (event, context) => {
   const reviewsToPublish = await Promise.all([
     getAppStoreReviewsToPublish(),
     getPlayStoreReviewsToPublish()
@@ -19,12 +19,20 @@ const looper = async () => {
 
   try {
     if (reviewsToPublish) {
-      reviewsToPublish.forEach(postReview);
+      if (isProduction()) {
+        console.log(`Publishing ${reviewsToPublish.length} reviews`);
+        reviewsToPublish.forEach(postReview);
+      } else {
+        console.log(`Would have published ${reviewsToPublish.length} reviews`);
+      }
     }
   } catch (e) {
     console.error(e);
   }
 };
 
-looper();
-setInterval(looper, pollingIntervalMs);
+if (!isProduction()) getAndPublishReviews();
+
+module.exports = {
+  getAndPublishReviews
+};

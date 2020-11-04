@@ -1,12 +1,16 @@
+const { getReviews, putReviews, TableNames } = require('../db/dynamo-service');
 const { getAppStoreReviews } = require('./app-store-adapter');
-const { ReviewBuffer } = require('../review-buffer');
-
-const buffer = new ReviewBuffer('app_store', 500);
 
 const getAppStoreReviewsToPublish = async () => {
-  const reviews = await getAppStoreReviews();
-  const filteredReviews = reviews.filter(review => !buffer.contains(review.id));
-  filteredReviews.forEach(review => buffer.add(review.id));
+  const registeredReviews = await getReviews(TableNames.IOS);
+  const registeredReviewsIds = registeredReviews.map(review => review.id);
+
+  const appStoreReviews = await getAppStoreReviews();
+  const filteredReviews = appStoreReviews.filter(
+    review => !registeredReviewsIds.includes(review.id)
+  );
+
+  await putReviews(TableNames.IOS, filteredReviews);
 
   return filteredReviews;
 };

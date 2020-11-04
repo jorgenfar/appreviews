@@ -1,9 +1,9 @@
 const { google } = require('googleapis');
 
-const apiKey = require('../../google-publisher.key.json');
-const { playStoreAppId } = require('../../config.json');
 const { Review } = require('../review');
 const { ANDROID } = require('../constants');
+
+const playStoreAppId = process.env.APPREVIEWS_PLAYSTORE_APPID;
 
 const getDevice = review => {
   const { deviceMetadata } = review.comments[0].userComment;
@@ -36,9 +36,9 @@ const apiLevelToOsVersion = apiLevel => {
 
 const scopes = ['https://www.googleapis.com/auth/androidpublisher'];
 const jwt = new google.auth.JWT(
-  apiKey.client_id,
+  process.env.APPREVIEWS_PLAYSTORE_CLIENT_ID,
   null,
-  apiKey.private_key,
+  process.env.APPREVIEWS_PLAYSTORE_PRIVATE_KEY.replace(/\\n/gm, '\n'),
   scopes,
   null
 );

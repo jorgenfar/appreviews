@@ -1,12 +1,16 @@
+const { getReviews, putReviews, TableNames } = require('../db/dynamo-service');
 const { getPlayStoreReviews } = require('./play-store-adapter');
-const { ReviewBuffer } = require('../review-buffer');
-
-const buffer = new ReviewBuffer('play_store', 500);
 
 const getPlayStoreReviewsToPublish = async () => {
-  const reviews = await getPlayStoreReviews();
-  const filteredReviews = reviews.filter(review => !buffer.contains(review.id));
-  filteredReviews.forEach(review => buffer.add(review.id));
+  const registeredReviews = await getReviews(TableNames.ANDROID);
+  const registeredReviewsIds = registeredReviews.map(review => review.id);
+
+  const playStoreReviews = await getPlayStoreReviews();
+  const filteredReviews = playStoreReviews.filter(
+    review => !registeredReviewsIds.includes(review.id)
+  );
+
+  await putReviews(TableNames.ANDROID, filteredReviews);
 
   return filteredReviews;
 };
