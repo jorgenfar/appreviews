@@ -1,8 +1,8 @@
-const { appStoreAppId } = require('../../config.json');
 const { get } = require('../fetch-wrapper');
 const { IOS } = require('../constants');
 const { Review } = require('../review');
 
+const appStoreAppId = process.env.APPREVIEWS_APPSTORE_APPID;
 const APP_STORE_RSS_FEED_URL = `https://itunes.apple.com/no/rss/customerreviews/id=${appStoreAppId}/sortBy=mostRecent/json`; // eslint-disable-line max-len
 
 const getReviews = () => get(APP_STORE_RSS_FEED_URL);

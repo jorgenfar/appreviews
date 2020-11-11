@@ -5,24 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "pm2 reload ecosystem.config.js --env production",
-    "stop": "pm2 stop appreviews",
     "dev": "node --inspect-brk src/index.js",
-    "deploy": "npm run lint && npm run copy-key && pm2 deploy production update",
     "lint": "eslint \"src/**/*.js\"",
     "lint:fix": "eslint --fix \"src/**/*.js\"",
-    "format": "prettier --write \"src/**/*.js\"",
-    "logs": "pm2 logs appreviews",
-    "monitor": "pm2 monit"
+    "format": "prettier --write \"src/**/*.js\""
   },
   "author": "Jørgen Faret",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.784.0",
     "googleapis": "^39.2.0",
     "isomorphic-fetch": "^2.2.1",
     "lodash.debounce": "^4.0.8",
-    "lodash.flatten": "^4.4.0",
-    "pm2": "^4.2.3"
+    "lodash.flatten": "^4.4.0"
   },
   "devDependencies": {
     "eslint": "^5.16.0",

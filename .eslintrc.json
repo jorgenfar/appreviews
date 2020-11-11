@@ -1,4 +1,3 @@
-
 {
   "extends": ["airbnb-base", "prettier", "prettier/react"],
   "plugins": ["prettier"],
@@ -8,7 +7,8 @@
     "import/no-dynamic-require": "off",
     "global-require": "off",
     "no-underscore-dangle": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "import/prefer-default-export": "off"
   },
   "env": {
     "node": true

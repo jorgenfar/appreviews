@@ -1,8 +1,0 @@
-{
-  "pollingIntervalMs": 300000,
-  "appStoreAppId": 09123091209312,
-  "playStoreAppId": "com.myorg.myapp",
-  "appleIcon": "https://emojis.slackmojis.com/emojis/images/1450319442/24/appleinc.png?1450319442",
-  "androidIcon": "https://emojis.slackmojis.com/emojis/images/1493026598/2124/android.png?1493026598",
-  "slackChannel": "#my-channel"
-}

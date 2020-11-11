@@ -1,5 +1,9 @@
-const { appleIcon, androidIcon } = require('../../config.json');
 const { platFormDependentString } = require('../utils/platform-utils');
+
+const appleIcon =
+  'https://emojis.slackmojis.com/emojis/images/1450319442/24/appleinc.png?1450319442';
+const androidIcon =
+  'https://emojis.slackmojis.com/emojis/images/1493026598/2124/android.png?1493026598';
 
 const stars = rating => `${':star:️'.repeat(rating)}`;
 

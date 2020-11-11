@@ -1,27 +1,34 @@
 # Getting started
 
-`pm2` is used to run the bot. Install `pm2` with the command:
-```
-npm i -g pm2
-```
-
 Install dependencies with `npm install`.
 
-# Developing
+## Environment variables
 
-Run `npm run dev`, and go to `chrome://inspect`. There you should see the node debugger listed.
+The functions rely on environment variables for its configuration. The following variables are required for the code to run:
+| Environment variable             | Example                                                       | Description                                       |
+|:---------------------------------|:--------------------------------------------------------------|:--------------------------------------------------|
+| APPREVIEWS_APPSTORE_APPID        | 123456789                                                     | The iOS App Store ID of the app                   |
+| APPREVIEWS_PLAYSTORE_APPID       | com.example.myapp                                             | The Play Store ID of the app                      |
+| APPREVIEWS_PLAYSTORE_CLIENT_ID   | 111111111111111111111                                         | The client ID of the PPlay Store API credentials  |
+| APPREVIEWS_PLAYSTORE_PRIVATE_KEY | -----BEGIN PRIVATE KEY-----<contents>----END PRIVATE KEY----- | The private key of the Play Store API credentials |
+| APPREVIEWS_SLACK_CHANNEL         | #my-appreview-channel                                         | The channel in which to post reviews              |
+| APPREVIEWS_SLACK_TOKEN           | xoxb-123456789101-123456789101-ajduqiwksuajshduekqiaksq       | The token for accessing the Slack API             |
 
-# Running
 
-Fill in `config.json` with APP ids.
+Additionally, the function uses the environment variable `ENVIRONMENT` to determine which DynamoDB tables it should use.
+This should _only_ be set in a production environment. The tables names are:
 
-Then, the app needs two key files copied into its working directory:
+| Environment | iOS Table Name          | Android table name          |
+|:------------|:------------------------|:----------------------------|
+| Production  | dbk_appreviews_ios      | dbk_appreviews_android      |
+| Development | dbk_appreviews_ios_test | dbk_appreviews_android_test |
 
-## Google Publisher API
 
-Download an API key (in JSON format) for the Google publisher API from a Google Play account that is an administrator of Play Store app ID filled in to `config.json`.
-Save the JSON file as `google-publisher.key.json`.
+## Running locally
+Run `node src/index.js` to do a dry-run of the code. This will get reviews from the app- and play store,
+and persist their IDs to the test tables. It will log how many reviews would have been published had it been
+run in a production environment.
 
-## Slack
-
-Create a file named `slack.key.json`, and create a JSON object in it with the key `token`, and give it your Bot User OAuth Access Token as a value.
+## Running in production
+The code runs in AWS Lambda, and is triggered by the schedule defined in `template.yml`.
+The code can be manually triggered in the AWS Lambda console. 
