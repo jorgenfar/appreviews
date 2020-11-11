@@ -24,7 +24,8 @@ const apiLevelToOsVersion = apiLevel => {
     26: '8.0.0',
     27: '8.1.0',
     28: '9',
-    29: '10'
+    29: '10', 
+    30: '11'
   };
 
   const osVersion = OS_VERSIONS[apiLevel];
