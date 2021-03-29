@@ -1,3 +1,4 @@
+const moment = require("moment");
 const AWS = require('aws-sdk');
 const { isProduction } = require('../utils/env-utils');
 
@@ -16,9 +17,7 @@ const client = new AWS.DynamoDB.DocumentClient();
 
 const getReviews = async tableName => {
   const params = {
-    TableName: tableName,
-    ScanIndexForward: 'false',
-    Limit: 500
+    TableName: tableName
   };
 
   try {
@@ -49,7 +48,8 @@ const putReviews = async (tableName, reviews) => {
         const reviewsParams = chunk.map(review => ({
           PutRequest: {
             Item: {
-              id: review.id
+              id: review.id,
+              timestamp: moment().valueOf()
             }
           }
         }));
