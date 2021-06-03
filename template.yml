@@ -36,7 +36,7 @@ Resources:
     Properties:
       CodeUri: ./
       Handler: src/index.getAndPublishReviews
-      Runtime: nodejs10.x
+      Runtime: nodejs14.x
       Description: A Lambda function that logs the payload of scheduled events.
       MemorySize: 128
       Timeout: 60
@@ -54,7 +54,7 @@ Resources:
     Properties:
       CodeUri: ./
       Handler: src/index.getAndPublishReviews
-      Runtime: nodejs10.x
+      Runtime: nodejs14.x
       Description: A Lambda function that logs the payload of scheduled events.
       MemorySize: 128
       Timeout: 60
@@ -72,7 +72,7 @@ Resources:
     Properties:
       CodeUri: ./
       Handler: src/index.getAndPublishReviews
-      Runtime: nodejs10.x
+      Runtime: nodejs14.x
       Description: A Lambda function that logs the payload of scheduled events.
       MemorySize: 128
       Timeout: 60
